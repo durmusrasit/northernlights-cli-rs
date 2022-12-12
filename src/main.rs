@@ -1,4 +1,5 @@
 use std::io;
+mod commands;
 
 fn main() {
     println!("INIT");
@@ -24,25 +25,12 @@ fn main() {
         let command = param_array[0];
 
         let response = match command {
-            "test" => test_command("test"),
-            "alphabet" => alphabet_command(),
-            "su" => su_command(param_array[1]),
+            "test" => commands::test_command("test"),
+            "alphabet" => commands::alphabet_command(),
+            "su" => commands::su_command(param_array[1]),
             _ => "COMMAND NOT FOUND.",
         };
 
         println!("> {}", response);
     }
-}
-
-fn test_command(_text: &str) -> &str {
-    "test" as &str
-}
-
-fn alphabet_command() -> &'static str {
-    "abcdef...."
-}
-
-fn su_command(string: &str) -> &'static str {
-    println!("Switch to the user {}", string);
-    ""
 }
