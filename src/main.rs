@@ -3,7 +3,7 @@ mod commands;
 
 fn main() {
     println!("INIT");
-    loop {
+    'promptLoop: loop {
         let mut line: String = String::new();
 
         io::stdin()
@@ -30,6 +30,10 @@ fn main() {
             "su" => commands::su_command(param_array[1]),
             _ => "COMMAND NOT FOUND.",
         };
+
+        if command == "exit" {
+            break 'promptLoop;
+        }
 
         println!("> {}", response);
     }
