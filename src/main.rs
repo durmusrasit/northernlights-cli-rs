@@ -1,16 +1,22 @@
-use std::io;
+use std::io::{self, Write};
+
 mod commands;
+
+fn read_line(line: &mut String) {
+    io::stdout().flush().expect("Failed to flush");
+    io::stdin().read_line(line).expect("Failed to read line");
+}
 
 fn main() {
     println!("INIT");
+
     'promptLoop: loop {
+        print!("< ");
         let mut line: String = String::new();
 
-        io::stdin()
-            .read_line(&mut line)
-            .expect("Failed to read line");
+        read_line(&mut line);
 
-        let strline: &str = line.as_str().trim();
+        let strline: &str = line.trim();
 
         let params = strline.split_whitespace();
 
